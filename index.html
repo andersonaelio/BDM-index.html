@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a0807">
+<meta name="theme-color" content="#000000">
 <title>BODYMIND — Studio Trainer</title>
 <meta name="description" content="Studio Trainer em Tapera, Florianópolis. Um treinador, um plano por pessoa, uma sessão por vez.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,15 +11,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0807;
-  --surface: #14110d;
-  --surface-2: #1c1813;
-  --border: rgba(245,210,150,0.06);
-  --border-strong: rgba(245,210,150,0.14);
-  --border-accent: rgba(245,196,0,0.38);
-  --text: #f7f3ec;
-  --text-dim: #a8a098;
-  --text-faint: #6b635a;
+  --bg: #000000;
+  --surface: #131313;
+  --surface-2: #1c1c1c;
+  --border: rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.14);
+  --border-accent: rgba(245,196,0,0.4);
+  --text: #f5f5f5;
+  --text-dim: #8a8a8a;
+  --text-faint: #4a4a4a;
   --accent: #F5C400;
   --accent-soft: rgba(245,196,0,0.12);
   --radius: 28px;
@@ -109,7 +109,7 @@ body {
   width: 100%;
   height: 100%;
   background: #000;
-  border: 1px solid rgba(245,210,150,0.09);
+  border: 1px solid rgba(255,255,255,0.09);
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
@@ -118,8 +118,8 @@ body {
 /* Pills inativos têm background ligeiramente claro pra parecerem cards/botões em repouso
    — antes ficavam invisíveis no #000 do body */
 .block:not(.active) .block-inner {
-  background: rgba(245,210,150,0.035);
-  border-color: rgba(245,210,150,0.14);
+  background: rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.14);
 }
 
 .block.active { cursor: default; }
@@ -711,9 +711,9 @@ body {
 }
 
 /* Stagger delays — cada etapa entra com pausa pra leitura */
-#block-1.active .step-row:nth-child(1) { transition-delay: 800ms; }
-#block-1.active .step-row:nth-child(2) { transition-delay: 1800ms; }
-#block-1.active .step-row:nth-child(3) { transition-delay: 2800ms; }
+#block-1.active .step-row:nth-child(1) { transition-delay: 400ms; }
+#block-1.active .step-row:nth-child(2) { transition-delay: 1000ms; }
+#block-1.active .step-row:nth-child(3) { transition-delay: 1600ms; }
 
 /* ============ LEOMAR + MANIFESTO ============ */
 .leomar-grid {
@@ -861,12 +861,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 1px solid rgba(245,210,150,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .case {
   padding: 22px 0;
-  border-bottom: 1px solid rgba(245,210,150,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -979,12 +979,13 @@ body {
 }
 
 .plano {
-  background: rgba(245,210,150,0.02);
-  border: 1px solid rgba(245,210,150,0.10);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 18px;
   padding: 22px 20px;
-  transition: border-color 240ms var(--ease), background 240ms var(--ease);
+  transition: border-color 240ms var(--ease), background 240ms var(--ease), box-shadow 240ms var(--ease);
   position: relative;
+  cursor: pointer;
 }
 
 .plano:hover {
@@ -1000,6 +1001,50 @@ body {
 .plano.expanded {
   border-color: rgba(245,196,0,0.55);
   background: rgba(245,196,0,0.025);
+}
+
+.plano.selected {
+  border-color: var(--accent);
+  background: rgba(245,196,0,0.05);
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 24px rgba(245,196,0,0.10);
+}
+
+.plano-tier-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plano-check {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms var(--ease);
+  flex-shrink: 0;
+}
+
+.plano-check svg {
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 200ms var(--ease);
+  stroke: #000;
+  stroke-width: 3;
+}
+
+.plano.selected .plano-check {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.plano.selected .plano-check svg {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .plano-head {
@@ -1098,7 +1143,7 @@ body {
   gap: 8px;
   width: 100%;
   text-align: left;
-  border-top: 1px solid rgba(245,210,150,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
   transition: color 200ms ease;
 }
 
@@ -1170,7 +1215,7 @@ body {
   flex-direction: column;
   gap: 14px;
   padding-top: 20px;
-  border-top: 1px solid rgba(245,210,150,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .planos-note {
@@ -1217,7 +1262,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .plano { padding: 18px 16px; }
+  .plano { padding: 15px 14px; }
   .plano-name { font-size: 20px; }
   .pp-val { font-size: 19px; }
   .plano-summary { font-size: 12.5px; }
@@ -1579,7 +1624,7 @@ button:focus-visible, input:focus-visible {
 .intro {
   position: fixed;
   inset: 0;
-  background: var(--bg);
+  background: #000;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -1695,8 +1740,8 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   flex-direction: column;
   gap: 14px;
   padding: 28px 0;
-  border-top: 1px solid rgba(245,210,150,0.08);
-  border-bottom: 1px solid rgba(245,210,150,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 32px;
 }
 
@@ -1759,7 +1804,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   flex-direction: column;
   gap: 12px;
   padding-top: 24px;
-  border-top: 1px solid rgba(245,210,150,0.06);
+  border-top: 1px solid rgba(255,255,255,0.06);
   margin-top: auto;
 }
 
@@ -1812,7 +1857,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: var(--bg);
+  background: #000;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1845,7 +1890,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   align-items: center;
   justify-content: space-between;
   padding: 24px 28px;
-  border-bottom: 1px solid rgba(245,210,150,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   flex-shrink: 0;
 }
 
@@ -1861,7 +1906,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(245,210,150,0.12);
+  border: 1px solid rgba(255,255,255,0.12);
   background: transparent;
   color: var(--text);
   cursor: pointer;
@@ -1958,7 +2003,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
 
 .ao-slot {
   background: transparent;
-  border: 1px solid rgba(245,210,150,0.10);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 18px;
   padding: 22px 16px;
   display: flex;
@@ -2029,7 +2074,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   width: 100%;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(245,210,150,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
   border-radius: 0;
   padding: 16px 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -2046,7 +2091,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
 }
 
 .ao-input::placeholder {
-  color: rgba(245,210,150,0.18);
+  color: rgba(255,255,255,0.18);
   font-weight: 200;
 }
 
@@ -2064,7 +2109,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   flex-direction: column;
   gap: 0;
   margin-top: 8px;
-  border-top: 1px solid rgba(245,210,150,0.06);
+  border-top: 1px solid rgba(255,255,255,0.06);
   margin-bottom: 24px;
 }
 
@@ -2073,7 +2118,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   grid-template-columns: 80px 1fr;
   align-items: baseline;
   padding: 16px 0;
-  border-bottom: 1px solid rgba(245,210,150,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   gap: 16px;
 }
 
@@ -2117,7 +2162,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   gap: 12px;
   padding-top: 24px;
   margin-top: auto;
-  border-top: 1px solid rgba(245,210,150,0.06);
+  border-top: 1px solid rgba(255,255,255,0.06);
   flex-shrink: 0;
 }
 
@@ -2131,7 +2176,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
 
 .ao-back {
   background: transparent;
-  border: 1px solid rgba(245,210,150,0.12);
+  border: 1px solid rgba(255,255,255,0.12);
   color: var(--text-dim);
   padding: 12px 18px;
   border-radius: 999px;
@@ -2146,7 +2191,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
 }
 
 .ao-back:hover {
-  border-color: rgba(245,210,150,0.25);
+  border-color: rgba(255,255,255,0.25);
   color: var(--text);
 }
 
@@ -2207,6 +2252,27 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   .ao-step.gone-left { transform: none; }
 }
 
+/* Links funcionais */
+.vline-link { text-decoration: none; color: inherit; transition: color 180ms ease; display: block; }
+.vline-link:hover { color: var(--accent); }
+.lm-link { text-decoration: none; color: inherit; transition: color 180ms ease; }
+.lm-link:hover { color: var(--accent); }
+
+/* Indicador de scroll: fade no rodapé dos cards com conteúdo escondido */
+@media (max-width: 700px) {
+  #block-3.active .detail-content::after,
+  #block-4.active .detail-content::after {
+    content: '';
+    position: sticky;
+    bottom: -1px;
+    display: block;
+    height: 42px;
+    margin-top: -42px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.85));
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+}
 </style>
 </head>
 <body>
@@ -2297,23 +2363,8 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
         <h2 class="section-title">Quem <em>te atende.</em></h2>
 
         <p class="leomar-intro">
-          <strong>Leomar Flores</strong> é personal trainer no BODYMIND. O studio é dele. O atendimento também. Quem entra vai ser recebido, avaliado e acompanhado pela mesma pessoa do começo ao fim.
+          <strong>Leomar Flores</strong> é o dono e o personal do BODYMIND. Quem entra é recebido, avaliado e acompanhado pela mesma pessoa do começo ao fim.
         </p>
-
-        <div class="leo-manifesto">
-          <div class="lm-line">
-            <span class="lm-num">Doze</span>
-            <span class="lm-qual">anos no ofício.</span>
-          </div>
-          <div class="lm-line">
-            <span class="lm-num">Quatro</span>
-            <span class="lm-qual">modalidades acompanhadas.</span>
-          </div>
-          <div class="lm-line">
-            <span class="lm-num">Um</span>
-            <span class="lm-qual">aluno por sessão.</span>
-          </div>
-        </div>
 
         <div class="leo-philosophy">
           <span class="lp-eyebrow">Filosofia BMD</span>
@@ -2329,7 +2380,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
           </div>
           <div class="lm-row">
             <span class="lm-label">Instagram</span>
-            <span class="lm-value">@leomarflorespersonal</span>
+            <a class="lm-value lm-link" href="https://instagram.com/leomarflorespersonal" target="_blank" rel="noopener">@leomarflorespersonal ↗</a>
           </div>
         </div>
       </div>
@@ -2349,7 +2400,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
         <h2 class="section-title">Quem tá <em>treinando.</em></h2>
 
         <p class="results-lede">
-          Casos reais. Sem antes e depois dramático, sem foto de academia. Pessoas que entraram, ficaram, e continuam.
+          Gente real que entrou, ficou e continua.
         </p>
 
         <div class="cases-list">
@@ -2362,10 +2413,6 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
               <div class="cd-row">
                 <span class="cd-label">Começou</span>
                 <span class="cd-value">Voltando depois de 5 anos parada</span>
-              </div>
-              <div class="cd-row">
-                <span class="cd-label">Frequência</span>
-                <span class="cd-value">3x por semana, sem falhar</span>
               </div>
               <div class="cd-row">
                 <span class="cd-label">Hoje</span>
@@ -2386,10 +2433,6 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
                 <span class="cd-value">Lesão crônica no joelho direito</span>
               </div>
               <div class="cd-row">
-                <span class="cd-label">Foco</span>
-                <span class="cd-value">Mobilidade e fortalecimento progressivo</span>
-              </div>
-              <div class="cd-row">
                 <span class="cd-label">Hoje</span>
                 <span class="cd-value">Voltou a correr 5km sem dor</span>
               </div>
@@ -2397,30 +2440,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
             <p class="case-quote">"O plano respeita meu joelho e funciona. Não é treino genérico, é meu."</p>
           </article>
 
-          <article class="case">
-            <header class="case-head">
-              <span class="case-name">Aline B.</span>
-              <span class="case-meta">há 8 meses no studio</span>
-            </header>
-            <div class="case-data">
-              <div class="cd-row">
-                <span class="cd-label">Começou</span>
-                <span class="cd-value">Pós-parto, querendo voltar gradual</span>
-              </div>
-              <div class="cd-row">
-                <span class="cd-label">Frequência</span>
-                <span class="cd-value">2x por semana + acompanhamento WhatsApp</span>
-              </div>
-              <div class="cd-row">
-                <span class="cd-label">Hoje</span>
-                <span class="cd-value">Mais forte que antes da gravidez</span>
-              </div>
-            </div>
-            <p class="case-quote">"Aqui ninguém fica no celular enquanto você levanta peso."</p>
-          </article>
-        </div>
-
-        <p class="results-note">Casos representativos. Nomes e detalhes a confirmar com o Leomar antes da publicação.</p>
+          </div>
       </div>
     </div>
   </article>
@@ -2438,14 +2458,17 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
         <h2 class="section-title">Como funciona o <em>acompanhamento.</em></h2>
 
         <p class="planos-lede">
-          Três níveis de compromisso. Nenhum melhor que o outro — só diferentes pelo tempo que você quer dedicar. Decide depois da avaliação.
+          Três níveis de compromisso. Você só decide depois da avaliação.
         </p>
 
         <div class="planos-list">
-          <article class="plano" data-plano="mensal">
+          <article class="plano" data-plano="mensal" data-preco="R$ 179/mês">
             <header class="plano-head">
               <div class="plano-info">
-                <span class="plano-tier">Nível 01</span>
+                <div class="plano-tier-row">
+                  <span class="plano-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="plano-tier">Nível 01</span>
+                </div>
                 <h3 class="plano-name">Mensal</h3>
               </div>
               <div class="plano-price-block">
@@ -2453,9 +2476,6 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
                 <span class="plano-compromise">sem fidelidade</span>
               </div>
             </header>
-            <div class="plano-summary">
-              Pra quem quer começar sem amarrar nada. Avaliação completa, treino individualizado, dois encontros por semana.
-            </div>
             <button class="plano-expand-trigger" aria-expanded="false">
               <span class="pet-label">O que tá incluído</span>
               <svg class="pet-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6,9 12,15 18,9"/></svg>
@@ -2471,10 +2491,13 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
             </div>
           </article>
 
-          <article class="plano featured" data-plano="trimestral">
+          <article class="plano featured selected" data-plano="trimestral" data-preco="R$ 169/mês">
             <header class="plano-head">
               <div class="plano-info">
-                <span class="plano-tier">Nível 02 · mais escolhido</span>
+                <div class="plano-tier-row">
+                  <span class="plano-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="plano-tier">Nível 02 · mais escolhido</span>
+                </div>
                 <h3 class="plano-name">Trimestral</h3>
               </div>
               <div class="plano-price-block">
@@ -2482,9 +2505,6 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
                 <span class="plano-compromise">3 meses · economiza R$ 30</span>
               </div>
             </header>
-            <div class="plano-summary">
-              Pra quem quer ver resultado concreto. Tempo o bastante pra o corpo responder, sem se prender a longo prazo.
-            </div>
             <button class="plano-expand-trigger" aria-expanded="false">
               <span class="pet-label">O que tá incluído</span>
               <svg class="pet-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6,9 12,15 18,9"/></svg>
@@ -2500,10 +2520,13 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
             </div>
           </article>
 
-          <article class="plano" data-plano="semestral">
+          <article class="plano" data-plano="semestral" data-preco="R$ 159/mês">
             <header class="plano-head">
               <div class="plano-info">
-                <span class="plano-tier">Nível 03</span>
+                <div class="plano-tier-row">
+                  <span class="plano-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="plano-tier">Nível 03</span>
+                </div>
                 <h3 class="plano-name">Semestral</h3>
               </div>
               <div class="plano-price-block">
@@ -2511,9 +2534,6 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
                 <span class="plano-compromise">6 meses · economiza R$ 120</span>
               </div>
             </header>
-            <div class="plano-summary">
-              Pra quem quer transformação real. Periodização avançada, análise corporal trimestral, acompanhamento profundo.
-            </div>
             <button class="plano-expand-trigger" aria-expanded="false">
               <span class="pet-label">O que tá incluído</span>
               <svg class="pet-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6,9 12,15 18,9"/></svg>
@@ -2556,7 +2576,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
         <h2 class="section-title">Conhecer o <em>studio.</em></h2>
 
         <p class="agendar-lede">
-          Primeira avaliação sem compromisso. Você vai, conhece o espaço, conversa com o Leomar. Decide depois.
+          Primeira avaliação sem compromisso. Você conhece o espaço, conversa com o Leomar e decide depois.
         </p>
 
         <div class="agendar-cta-row">
@@ -2574,7 +2594,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
 
         <div class="visita-strip">
           <span class="vlabel">Onde fica</span>
-          <span class="vline">Rua da Creche, 225 <span class="dim">· Tapera da Base, Florianópolis</span></span>
+          <a class="vline vline-link" href="https://www.google.com/maps/search/?api=1&query=Rua+da+Creche+225+Tapera+Florianopolis" target="_blank" rel="noopener">Rua da Creche, 225 <span class="dim">· Tapera da Base · ver no mapa ↗</span></a>
           <span class="vline"><span class="dim">Atendimento</span> 7h–12h · 17h–22h</span>
         </div>
       </div>
@@ -2703,6 +2723,10 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
             <div class="ao-sum-row">
               <span class="ao-sum-label">Quando</span>
               <span class="ao-sum-value" id="aoSlotRef">_</span>
+            </div>
+            <div class="ao-sum-row">
+              <span class="ao-sum-label">Plano</span>
+              <span class="ao-sum-value" id="aoPlanoRef">_</span>
             </div>
             <div class="ao-sum-row">
               <span class="ao-sum-label">Onde</span>
@@ -2873,6 +2897,23 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
   });
 
   // ============================================================
+  // PLANOS — seleção (radio-style: só um selecionado por vez)
+  // ============================================================
+  const planoCards = document.querySelectorAll('.plano');
+  window.selectedPlano = { nome: 'Trimestral', preco: 'R$ 169/mês' }; // default = mais escolhido
+
+  planoCards.forEach(card => {
+    card.addEventListener('click', () => {
+      planoCards.forEach(p => p.classList.remove('selected'));
+      card.classList.add('selected');
+      window.selectedPlano = {
+        nome: card.querySelector('.plano-name').textContent.trim(),
+        preco: card.dataset.preco || ''
+      };
+    });
+  });
+
+  // ============================================================
   // AGENDAR OVERLAY — fluxo de marcação em 3 steps
   // ============================================================
   const agendarOverlay = document.getElementById('agendarOverlay');
@@ -2935,6 +2976,8 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
     if (n === 3) {
       aoNomeRef.textContent = agendarState.nome;
       aoSlotRef.textContent = agendarState.slotLabel;
+      document.getElementById('aoPlanoRef').textContent =
+        `${window.selectedPlano.nome} · ${window.selectedPlano.preco}`;
     }
   }
 
@@ -3009,6 +3052,7 @@ body.revealed #block-5 { transition: transform var(--dur) var(--ease), width var
       `Quero marcar uma avaliação.`,
       `Nome: ${agendarState.nome}`,
       `Horário escolhido: ${agendarState.slotLabel}`,
+      `Plano de interesse: ${window.selectedPlano.nome} (${window.selectedPlano.preco})`,
       ``,
       `Pode confirmar?`
     ];
